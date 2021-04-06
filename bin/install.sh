@@ -10,7 +10,7 @@ case $1 in
     source <(egrep ^[a-z]\+= ${bindir}/send.sh)
     mkdir -p ${sendpath}
     sed "s#%%BINPATH%%#$bindir#" ${basedir}/etc/systemd/system/udp-sender.service > /etc/systemd/system/udp-sender.service
-    systemctl enable --now udp-receiver
+    systemctl enable --now udp-sender
     ;;
   receiever)
     dnf -y install http://www.udpcast.linux.lu/download/udpcast-20200328-1.x86_64.rpm
