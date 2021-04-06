@@ -1,0 +1,3 @@
+INTERFACE='enp0s8'
+TRANSDIR='%%BASEDIR%%/receive'
+EXTRACTOR="/usr/bin/tar --gunzip --extract --directory="

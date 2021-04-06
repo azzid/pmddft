@@ -1,0 +1,16 @@
+[Unit]
+Description=UDP Receiver
+Documentation=man:udp-receiver(1)
+Requires=network-online.target
+After=NetworkManager-wait-online.service
+
+[Service]
+Type=exec
+EnvironmentFile=/etc/sysconfig/udp-receiver
+ExecStart=/usr/sbin/udp-receiver --mcast-rdv-address 127.0.0.1 --interface $INTERFACE --pipe "${EXTRACTOR}${TRANSDIR}" 
+#Restart=always
+Restart=on-success
+RestartSec=0
+
+[Install]
+WantedBy=multi-user.target
