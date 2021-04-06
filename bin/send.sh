@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Poor Mans Data-Diode File Transfer
 # sender -(>|)- recipient
-sendpath='/opt/pmddft/send'
+sendpath='%%BASEDIR%%/send'
 recipient='192.168.1.20'
 interface='enp0s8'
 throttle='10M'

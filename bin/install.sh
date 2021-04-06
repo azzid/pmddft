@@ -5,6 +5,7 @@ case $1 in
   sender)
     dnf -y install epel-release
     dnf -y install inotify-tools udpcast
+    sed -i "s#%%BASEDIR%%#$basedir#" ${bindir}/send.sh
     source <(egrep ^[a-z]\+= ${bindir}/send.sh)
     mkdir -p ${sendpath}
     sed "s#%%BINPATH%%#$bindir#" ${basedir}/etc/systemd/system/udp-sender.service > /etc/systemd/system/udp-sender.service
