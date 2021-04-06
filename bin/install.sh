@@ -1,10 +1,11 @@
 #!/usr/bin/bash
-bindir="`dirname $0`"
+bindir="$(readlink -f `dirname $0`)"
 basedir="${bindir%/*}"
 case $1 in
   sender)
     dnf -y install epel-release
-    dnf -y install inotify-tools udpcast
+    dnf -y install inotify-tools
+    dnf -y install http://www.udpcast.linux.lu/download/udpcast-20200328-1.x86_64.rpm
     sed -i "s#%%BASEDIR%%#$basedir#" ${bindir}/send.sh
     source <(egrep ^[a-z]\+= ${bindir}/send.sh)
     mkdir -p ${sendpath}
@@ -12,7 +13,7 @@ case $1 in
     systemctl enable --now udp-receiver
     ;;
   receiever)
-    dnf -y install udpcast
+    dnf -y install http://www.udpcast.linux.lu/download/udpcast-20200328-1.x86_64.rpm
     cp ${basedir}/etc/systemd/system/udp-receiver.service /etc/systemd/system/udp-receiver.service
     sed "s#%%BASEDIR%%#$basedir#" ${basedir}/etc/sysconfig/udp-receiver > /etc/sysconfig/udp-receiver
     source /etc/sysconfig/udp-receiver
